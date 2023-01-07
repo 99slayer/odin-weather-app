@@ -1,0 +1,23 @@
+{
+  "name": "odin-weather-app",
+  "version": "1.0.0",
+  "description": "Creating a simple weather app to practice working with promises and apis.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wunderbar-x/odin-weather-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wunderbar-x/odin-weather-app/issues"
+  },
+  "homepage": "https://github.com/wunderbar-x/odin-weather-app#readme",
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
