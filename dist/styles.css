@@ -53,12 +53,45 @@ body{
 #search-button span{
   padding-top: 3px;
 }
+#error{
+  display: none;
+  width: 80%;
+  height: 50%;
+}
 /* .main{} */
-.main #test{
+#weather-card{
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(6,1fr);
+  gap: 10px;
   margin-top: 100px;
   height: 460px;
   width: 1000px;
   background-color: rgb(130, 169, 255);
   /* background-image: url(https://images.unsplash.com/photo-1528818955841-a7f1425131b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80); */
   border-radius: 22px;
+}
+#area-info{
+  grid-column: 1/5;
+  border: 2px solid black;
+}
+#unit-slider-cont{
+  grid-column: 7/9;
+  border: 2px solid black;
+}
+#icon{
+  grid-column: 1/4;
+  grid-row: 2/5;
+  border: 2px solid black;
+}
+#temp-cont{
+  grid-column: 1/5;
+  grid-row: 5/7;
+  border: 2px solid black;
+}
+#weather-details{
+  grid-column: 4/7;
+  grid-row: 2/5;
+  border: 2px solid black;
 }
