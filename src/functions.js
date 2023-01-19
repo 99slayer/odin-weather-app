@@ -1,4 +1,5 @@
 import { test } from "./DOM";
+import { updateCurrentData } from "./DOM";
 
 function pullWeatherData(city){
   const request = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=e0cbdd54ee0f62527d707f21ce6d2e0d`,{mode:'cors'})
@@ -38,8 +39,8 @@ function parseWeatherData(weatherObj){
     weatherData.feelsLike = data.main.feels_like;
     weatherData.humidity = data.main.humidity + '%';
     // weatherData.weather = data.weather;
-    // weatherData.description = data.weather.description;
-    // weatherData.icon = data.weather.icon;
+    weatherData.description = data.weather[0].description;
+    weatherData.icon = data.weather[0].icon;
     // data.weather is an array of the current weather conditions
     weatherData.windSpeed = data.wind.speed;
     weatherData.clouds = data.clouds.all + '%';
@@ -58,5 +59,6 @@ function parseWeatherData(weatherObj){
 export async function getData(input){
   const raw = await pullWeatherData(input);
   const data = parseWeatherData(raw);
+  updateCurrentData(data);
   return data;
 };

@@ -1,8 +1,8 @@
 //PULL, ORGANIZE, DISPLAY
 import { getData } from "./functions";
-const btn = document.querySelector('#search-button');
+import { updateWeatherCard } from "./DOM";
 
-btn.onclick = function(){
-  // pullWeatherData('edmonton');
-  getData('calgary');
+window.onload = async function(){
+  let onloadData = await getData('new york');
+  updateWeatherCard(onloadData);
 };
