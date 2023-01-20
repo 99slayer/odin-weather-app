@@ -1,4 +1,3 @@
-import { test } from "./DOM";
 import { updateCurrentData } from "./DOM";
 
 function pullWeatherData(city){

@@ -28,27 +28,42 @@ const humidity = document.getElementById('humidity');
 const wind = document.getElementById('wind');
 const precipitation = document.getElementById('precipitation');
 
-searchInput.addEventListener('change', async (e)=>{
-  //gets us weather data
+searchInput.onchange = (e) => {search(searchInput.value)};
+searchBtn.onclick = (e) => {search(searchInput.value)};
 
-  //THIS SHOULD BE ITS OWN FUNCTION**
-  let weatherObj = await getData(searchInput.value);
+async function search(input){
+  let weatherObj = await getData(input);
   if(!weatherObj){
-    //display error message
+    //should have some kind of error displayed
     return;
   }
-  // currentData = weatherObj;
   updateWeatherCard(currentData);
-});
+}
+
+export function updateCurrentData(data){
+  currentData = data;
+};
+
+function getTimeInfo(offset){
+  let d = new Date();
+  let localTime = d.getTime();
+  let localOffset = d.getTimezoneOffset()* 60000
+  let utc = localTime + localOffset;
+  let time = utc + (1000 * offset);
+  let nd = new Date(time);
+  let myDate = nd.toDateString() + ' ' + nd.getHours() + ':' + nd.getMinutes();
+  return myDate;
+}
 
 export function updateWeatherCard(weatherData){
+  console.log(getTimeInfo(weatherData.timezone));
   city.textContent = weatherData.city + ',';
   country.textContent = weatherData.country;
-  // date.textContent = Date.now();
-  temp.textContent = parseFloat(weatherData.temp).toFixed(1) + '°';
-  minMax.textContent = `${parseFloat(weatherData.tempMax).toFixed(1)}° | ${parseFloat(weatherData.tempMin).toFixed(1)}°`;
+  date.textContent = getTimeInfo(weatherData.timezone);
+  temp.textContent = parseFloat(weatherData.temp).toFixed() + '°';
+  minMax.textContent = `${parseFloat(weatherData.tempMax).toFixed()}° | ${parseFloat(weatherData.tempMin).toFixed()}°`;
   description.textContent = weatherData.description.toUpperCase();
-  feelsLike.textContent = 'FEELS LIKE: ' + parseFloat(weatherData.feelsLike).toFixed(1) + '°';
+  feelsLike.textContent = 'FEELS LIKE: ' + parseFloat(weatherData.feelsLike).toFixed() + '°';
   humidity.textContent = 'HUMIDITY: '+ weatherData.humidity;
   icon.src = `http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
   wind.textContent = 'WIND SPEED: ' + weatherData.windSpeed + 'mps';
@@ -59,17 +74,17 @@ export function updateWeatherCard(weatherData){
 function unitConversion(){
   if(!unitSliderInput.checked){
     //celcius => fahrenheit
-    currentData.temp = ((currentData.temp * 9/5) + 32).toFixed(1);
-    currentData.tempMin = ((currentData.tempMin * 9/5) + 32).toFixed(1);
-    currentData.tempMax = ((currentData.tempMax * 9/5) + 32).toFixed(1);
-    currentData.feelsLike = ((currentData.feelsLike * 9/5) + 32).toFixed(1);
+    currentData.temp = ((currentData.temp * 9/5) + 32).toFixed();
+    currentData.tempMin = ((currentData.tempMin * 9/5) + 32).toFixed();
+    currentData.tempMax = ((currentData.tempMax * 9/5) + 32).toFixed();
+    currentData.feelsLike = ((currentData.feelsLike * 9/5) + 32).toFixed();
     console.log({temp:currentData.temp,tempMin:currentData.tempMin,tempMax:currentData.tempMax,feelsLike:currentData.feelsLike});
   } else {
     //fahrenheit => celcius
-    currentData.temp = ((currentData.temp - 32) * 5/9).toFixed(1);
-    currentData.tempMin = ((currentData.tempMin - 32) * 5/9).toFixed(1);
-    currentData.tempMax = ((currentData.tempMax - 32) * 5/9).toFixed(1);
-    currentData.feelsLike = ((currentData.feelsLike - 32) * 5/9).toFixed(1);
+    currentData.temp = ((currentData.temp - 32) * 5/9).toFixed();
+    currentData.tempMin = ((currentData.tempMin - 32) * 5/9).toFixed();
+    currentData.tempMax = ((currentData.tempMax - 32) * 5/9).toFixed();
+    currentData.feelsLike = ((currentData.feelsLike - 32) * 5/9).toFixed();
     console.log({temp:currentData.temp,tempMin:currentData.tempMin,tempMax:currentData.tempMax,feelsLike:currentData.feelsLike});
   }
 }
@@ -97,10 +112,6 @@ unitSlider.onclick = function(){
   sliderFunc();
 };
 
-export function test(){
-  console.log('test');
-}
+function playLoadingAnimation(){
 
-export function updateCurrentData(data){
-  currentData = data;
-};
+}
