@@ -51,7 +51,11 @@ function getTimeInfo(offset){
   let utc = localTime + localOffset;
   let time = utc + (1000 * offset);
   let nd = new Date(time);
-  let myDate = nd.toDateString() + ' ' + nd.getHours() + ':' + nd.getMinutes();
+  let mins = nd.getMinutes();
+  if(mins<10){
+    mins = '0' + mins;
+  };
+  let myDate = nd.toDateString() + ' ' + nd.getHours() + ':' + mins;
   return myDate;
 }
 
