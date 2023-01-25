@@ -13,13 +13,6 @@ body{
   font-weight: 600;
   background-color: rgb(95, 95, 95);
 }
-.main{
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 800px;
-  background-color: rgb(60, 151, 255);
-}
 #header-cont{
   align-self: stretch;
   display: flex;
@@ -63,12 +56,28 @@ body{
 #search-button span{
   padding-top: 3px;
 }
-#error{
-  display: none;
-  width: 80%;
-  height: 50%;
+.main{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 800px;
+  background-color: rgb(60, 151, 255);
 }
-/* .main{} */
+#error{
+  padding: 20px;
+  margin-top: 100px;
+  height: 260px;
+  width: 540px;
+  display: none;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(130, 169, 255);
+  border: 4px solid white;
+  border-radius: 22px;
+}
+#error-msg{
+  margin-top: 60px;
+}
 #weather-card{
   padding: 10px;
   display: grid;

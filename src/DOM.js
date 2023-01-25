@@ -5,6 +5,9 @@ const searchInput = document.getElementById('search-input');
 searchInput.value = '';
 const searchBtn = document.getElementById('search-button');
 
+const error = document.getElementById('error');
+const errorMsg = document.getElementById('error-msg');
+
 const weatherCard = document.getElementById('weather-card');
 const areaInfo = document.getElementById('area-info');
 const city = document.getElementById('city');
@@ -37,6 +40,8 @@ async function search(input){
     //should have some kind of error displayed
     return;
   }
+  error.style.display = 'none';
+  weatherCard.style.display = 'grid';
   updateWeatherCard(currentData);
 }
 
@@ -116,6 +121,8 @@ unitSlider.onclick = function(){
   sliderFunc();
 };
 
-function playLoadingAnimation(){
-
+export function displayErrorMsg(message){
+  weatherCard.style.display = 'none';
+  error.style.display = 'flex';
+  errorMsg.textContent = message;
 }

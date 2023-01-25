@@ -1,4 +1,4 @@
-import { updateCurrentData } from "./DOM";
+import { displayErrorMsg, updateCurrentData } from "./DOM";
 
 function pullWeatherData(city){
   const request = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=e0cbdd54ee0f62527d707f21ce6d2e0d`,{mode:'cors'})
@@ -7,6 +7,7 @@ function pullWeatherData(city){
 
       //runs if input is not a city
       if(response.status === 404){
+        displayErrorMsg('Error! Please make sure your input is valid.')
         return ;
       }
       // return Promise.reject(response);
@@ -16,6 +17,7 @@ function pullWeatherData(city){
     // runs if request was rejected
     .catch(function(error){
       console.error(`ERROR:${error}`);
+      displayErrorMsg('Error! request was rejected!');
     });
   return request;
 };
@@ -51,6 +53,7 @@ function parseWeatherData(weatherObj){
     return weatherData;
   } catch (error) {
     //can throw error if the data variable is undefined
+    displayErrorMsg(error);
     console.error(error);
   };
 };
