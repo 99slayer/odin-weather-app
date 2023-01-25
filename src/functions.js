@@ -1,10 +1,9 @@
-import { displayErrorMsg, updateCurrentData } from "./DOM";
+import { displayErrorMsg, displayLoadingMsg, updateCurrentData } from "./DOM";
 
 function pullWeatherData(city){
   const request = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=e0cbdd54ee0f62527d707f21ce6d2e0d`,{mode:'cors'})
     .then(function(response){
       console.log(response);
-
       //runs if input is not a city
       if(response.status === 404){
         displayErrorMsg('Error! Please make sure your input is valid.')

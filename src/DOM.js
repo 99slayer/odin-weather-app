@@ -8,6 +8,9 @@ const searchBtn = document.getElementById('search-button');
 const error = document.getElementById('error');
 const errorMsg = document.getElementById('error-msg');
 
+const loading = document.getElementById('loading');
+const loadingMsg = document.getElementById('loading-msg');
+
 const weatherCard = document.getElementById('weather-card');
 const areaInfo = document.getElementById('area-info');
 const city = document.getElementById('city');
@@ -37,11 +40,8 @@ searchBtn.onclick = (e) => {search(searchInput.value)};
 async function search(input){
   let weatherObj = await getData(input);
   if(!weatherObj){
-    //should have some kind of error displayed
     return;
   }
-  error.style.display = 'none';
-  weatherCard.style.display = 'grid';
   updateWeatherCard(currentData);
 }
 
@@ -65,6 +65,12 @@ function getTimeInfo(offset){
 }
 
 export function updateWeatherCard(weatherData){
+  if(!weatherData){
+    return;
+  };
+  error.style.display = 'none';
+  // loading.style.display = 'none';
+  weatherCard.style.display = 'grid';
   console.log(getTimeInfo(weatherData.timezone));
   city.textContent = weatherData.city + ',';
   country.textContent = weatherData.country;
@@ -126,3 +132,8 @@ export function displayErrorMsg(message){
   error.style.display = 'flex';
   errorMsg.textContent = message;
 }
+// export function displayLoadingMsg(){
+//   weatherCard.style.display = 'none';
+//   loading.style.display = 'flex';
+//   loadingMsg.textContent = '...';
+// }
